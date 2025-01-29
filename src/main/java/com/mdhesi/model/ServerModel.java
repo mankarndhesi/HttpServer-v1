@@ -1,3 +1,7 @@
+/*
+    Manages data, such as request & response handling.
+ */
+
 package com.mdhesi.model;
 
 import java.io.BufferedReader;

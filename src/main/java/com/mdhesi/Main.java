@@ -1,3 +1,7 @@
+/*
+    Driver class -- Used for starting server.
+ */
+
 package com.mdhesi;
 
 import java.io.*;
