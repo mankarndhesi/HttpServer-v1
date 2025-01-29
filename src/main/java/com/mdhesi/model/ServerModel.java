@@ -20,51 +20,36 @@ public class ServerModel {
     private BufferedReader bufferedReader = null;
     private BufferedWriter bufferedWriter = null;
 
-    public ServerSocket getServerSocket() {
-        return serverSocket;
+    public void initializeConnections(ServerSocket serverSocket, Socket socket) throws Exception {
+        this.serverSocket = serverSocket;
+        this.socket = socket;
+        this.inputStreamReader = new InputStreamReader(socket.getInputStream());
+        this.outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
+        this.bufferedReader = new BufferedReader(inputStreamReader);
+        this.bufferedWriter = new BufferedWriter(outputStreamWriter);
     }
 
-    public void setServerSocket(ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
+    public ServerSocket getServerSocket() {
+        return serverSocket;
     }
 
     public Socket getSocket() {
         return socket;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
-
     public InputStreamReader getInputStreamReader() {
         return inputStreamReader;
-    }
-
-    public void setInputStreamReader(InputStreamReader inputStreamReader) {
-        this.inputStreamReader = inputStreamReader;
     }
 
     public OutputStreamWriter getOutputStreamWriter() {
         return outputStreamWriter;
     }
 
-    public void setOutputStreamWriter(OutputStreamWriter outputStreamWriter) {
-        this.outputStreamWriter = outputStreamWriter;
-    }
-
     public BufferedReader getBufferedReader() {
         return bufferedReader;
     }
 
-    public void setBufferedReader(BufferedReader bufferedReader) {
-        this.bufferedReader = bufferedReader;
-    }
-
     public BufferedWriter getBufferedWriter() {
         return bufferedWriter;
-    }
-
-    public void setBufferedWriter(BufferedWriter bufferedWriter) {
-        this.bufferedWriter = bufferedWriter;
     }
 }
