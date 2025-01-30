@@ -10,7 +10,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-@SuppressWarnings("resource")
 public class Main {
     public static void main(String[] args) throws Exception {
 
