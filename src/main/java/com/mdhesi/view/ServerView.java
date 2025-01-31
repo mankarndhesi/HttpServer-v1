@@ -7,12 +7,27 @@
 
 package com.mdhesi.view;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class ServerView {
 
-    private String htmlParser, response;
+    public static String fileParser (String filepath) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath));
+        String currentline;
+        StringBuilder builder;
+        builder = new StringBuilder();
 
+        while((currentline = bufferedReader.readLine()) != null) {
+            builder.append(currentline).append("\n");
+        }
+        bufferedReader.close();
+        return builder.toString();
+    }
 
-
-
+    public static String httpResponse() {
+        return null;
+    }
 
 }
