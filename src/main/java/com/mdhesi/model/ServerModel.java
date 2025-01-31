@@ -29,6 +29,10 @@ public class ServerModel {
         this.bufferedWriter = new BufferedWriter(outputStreamWriter);
     }
 
+    public void destroyConnections() throws Exception {
+
+    }
+
     public ServerSocket getServerSocket() {
         return serverSocket;
     }
