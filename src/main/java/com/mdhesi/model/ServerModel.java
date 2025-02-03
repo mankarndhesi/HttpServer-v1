@@ -1,16 +1,15 @@
 /*
-    Manages data, such as request & response handling.
+    Manages the server socket and accepts connections.
+    Passes the connection to the controller.
  */
 
 package com.mdhesi.model;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+@SuppressWarnings("ALL")
 public class ServerModel {
 
     private ServerSocket serverSocket = null;
@@ -29,8 +28,18 @@ public class ServerModel {
         this.bufferedWriter = new BufferedWriter(outputStreamWriter);
     }
 
-    public void destroyConnections() throws Exception {
-
+    public void closeConnections() throws Exception {
+        try {
+            if (bufferedReader != null) bufferedReader.close();
+            if (bufferedWriter != null) bufferedWriter.close();
+            if (inputStreamReader != null) inputStreamReader.close();
+            if (outputStreamWriter != null) outputStreamWriter.close();
+            if (socket != null) socket.close();
+            if (serverSocket != null) serverSocket.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ServerSocket getServerSocket() {

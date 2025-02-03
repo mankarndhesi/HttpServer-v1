@@ -24,10 +24,10 @@ public class Main {
         ServerModel serverModel = new ServerModel();
         serverModel.initializeConnections(serverSocket, socket);
 
-//        ServerView view = new ServerView();
+        ServerController serverController = new ServerController();
+        ServerController.sendResponse(socket);
 
-
-       System.out.println(ServerController.fileParser());
-
+       System.out.println("Connection closing...");
+       serverModel.closeConnections();
     }
 }

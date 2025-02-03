@@ -1,5 +1,6 @@
 /*
-    Controller class -- Directs traffic, processes, and sends responses.
+    Handles request parsing and generates responses.
+    Decides whether to close the connection.
  */
 
 package com.mdhesi.controller;
@@ -7,11 +8,10 @@ package com.mdhesi.controller;
 import com.mdhesi.model.ServerModel;
 import com.mdhesi.view.ServerView;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class ServerController {
 
@@ -19,8 +19,6 @@ public class ServerController {
     ServerView viewer = new ServerView();
 
     public static String fileParser () throws IOException {
-
-        ServerController controller = new ServerController();
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(ServerController.getFilepath()));
         String currentline;
@@ -36,17 +34,23 @@ public class ServerController {
 
     public static String httpResponse() throws IOException {
 
-        final String CRLF = "\n\r";
+        final String CRLF = "\r\n";
         String response =
 
                 "HTTP/1.1 200 OK" + CRLF + "Content-Length: " + ServerController.fileParser().getBytes().length +CRLF +
                 CRLF + ServerController.fileParser() + CRLF + CRLF;
 
-
-
-
         return response;
     }
+
+    public static void sendResponse(Socket clientSocket) throws IOException {
+        OutputStream outputStream = clientSocket.getOutputStream();
+        String response = httpResponse();
+        outputStream.write(response.getBytes(StandardCharsets.UTF_8));
+        outputStream.flush();
+    }
+
+
 
     public static String getFilepath() {
         return filepath;
