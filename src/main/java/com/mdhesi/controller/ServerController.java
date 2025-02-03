@@ -35,12 +35,9 @@ public class ServerController {
     public static String httpResponse() throws IOException {
 
         final String CRLF = "\r\n";
-        String response =
 
-                "HTTP/1.1 200 OK" + CRLF + "Content-Length: " + ServerController.fileParser().getBytes().length +CRLF +
-                CRLF + ServerController.fileParser() + CRLF + CRLF;
-
-        return response;
+        return "HTTP/1.1 200 OK" + CRLF + "Content-Length: " + ServerController.fileParser().getBytes().length +CRLF +
+        CRLF + ServerController.fileParser() + CRLF + CRLF;
     }
 
     public static void sendResponse(Socket clientSocket) throws IOException {

@@ -17,17 +17,17 @@ public class Main {
 
         ServerSocket serverSocket = new ServerSocket(8080);
         System.out.println("Server starting...");
+            Socket socket = serverSocket.accept();
+            System.out.println("Client connected!");
 
-        Socket socket = serverSocket.accept();
-        System.out.println("Client connected!");
+            ServerModel serverModel = new ServerModel();
+            serverModel.initializeConnections(serverSocket, socket);
 
-        ServerModel serverModel = new ServerModel();
-        serverModel.initializeConnections(serverSocket, socket);
+            ServerController serverController = new ServerController();
+            ServerController.sendResponse(socket);
 
-        ServerController serverController = new ServerController();
-        ServerController.sendResponse(socket);
+            System.out.println("Connection closing...");
+            serverModel.closeConnections();
 
-       System.out.println("Connection closing...");
-       serverModel.closeConnections();
     }
 }
